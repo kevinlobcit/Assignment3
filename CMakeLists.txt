@@ -3,4 +3,4 @@ project(Assignment3)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Assignment3 main.cpp heap.hpp)
+add_executable(Assignment3 main.cpp heap.hpp heapContainer.hpp)

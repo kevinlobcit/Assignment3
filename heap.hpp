@@ -13,29 +13,25 @@ template <typename T>
 class heap {
 public:
     std::vector<T> storage;
-    static heap& get_instance()
-    {
-        static heap instance; // Guaranteed to be destroyed
-        return instance; //Instantiated on first use
-    }
-private:
-
     heap(){}
 
 
     heap(std::vector<T> input)
     {
-
+        for(int i = 0; i < input.size(); i++)
+        {
+            storage.push_back(input.at(i));
+        }
+        heapify();
     }
 
+    static bool cmp(T i, T j){return i<j;}
     void heapify()
     {
-        std::sort(storage.begin(), storage.begin()+storage.size());
+        std::sort(storage.begin(), storage.end(), cmp);
     }
 
 public:
-    heap(heap const&) = delete;
-    void operator=(heap const&) = delete;
 
     void push(T element)
     {
@@ -68,11 +64,12 @@ public:
 };
 
 template<typename T>
-std::ostream& operator<<(std::ostream& os, const heap<T> prntHeap)
+std::ostream& operator<<(std::ostream& os, heap<T> prntHeap)
 {
+
     for(int i = 0; i < prntHeap.size(); i++)
     {
-        os << prntHeap.storage.at(i) + " ";
+        os <<  prntHeap.storage.at(i) << " ";
     }
     return os;
 }
